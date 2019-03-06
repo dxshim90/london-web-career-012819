@@ -1,0 +1,7 @@
+<br /><b><%= flash[:error] %></b><br />
+<%= form_tag "/login", method: :post do |f| %>
+  <input type="textfield" name="username"></input>
+  <input type="password" name="password"></input>
+  <input type="submit"> </input>
+<% end %>
+
