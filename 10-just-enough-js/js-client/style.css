@@ -1,0 +1,16 @@
+* {
+  font-family: sans-serif;
+}
+
+table {
+  border: solid 2px black;
+}
+
+.header {
+  background: pink;
+}
+
+tr {
+  color: red;
+}
+

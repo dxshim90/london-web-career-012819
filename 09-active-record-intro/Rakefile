@@ -5,8 +5,3 @@ desc "Start our app console"
 task :console do
   Pry.start
 end
-
-desc "Say hello to the user."
-task :greet do
-  puts "Hello there!"
-end
