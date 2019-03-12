@@ -1,0 +1,26 @@
+* {
+  font-family: sans-serif;
+}
+
+table {
+  border: solid 2px black;
+}
+
+.header {
+  background: pink;
+}
+
+tr {
+  color: red;
+}
+
+form {
+  padding: 10px;
+  margin: 10px;
+}
+
+#parent, #child, #grandchild {
+  border: solid 2px black;
+  margin: 20px;
+  padding: 20px;
+}
