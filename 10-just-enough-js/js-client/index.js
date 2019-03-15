@@ -82,3 +82,15 @@ function addBooks (books) {
 }
 
 addBooks(books)
+
+
+import { useEffect } from 'react'
+
+const useEventListener = (type, handler) => {
+  useEffect(() => {
+    YOUR_CONSTRUCT.addEventListener(type, handler)
+    return () => YOUR_CONSTRUCT.removeEventListener(handler)
+  }, [])
+}
+
+export default useEventListener
