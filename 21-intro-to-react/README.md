@@ -1,4 +1,4 @@
-Intro to React // JSX & Props
+Intro to React // Props and Expressions
 =============================
 
 ## SWBAT
