@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Greeting from "./Greeting"
 
 class App extends Component {
+
+  renderGreetings(){
+    return this.props.data.map((obj, index) => {
+      return <Greeting key={obj.id} {...obj}/>
+    })
+  }
+
   render() {
+
+    // return (
+    //   <div id="1">
+    //     {
+    //       data.map(obj => {
+    //         return <Greeting phrase={obj.phrase} name={obj.name}/>
+    //       })
+    //     }
+    //   </div>
+    // );
+
+   
+    console.log("RENDERING APP")
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Beefy McSteaker
-          </a>
-        </header>
+      <div id="1">
+        {this.renderGreetings()}
       </div>
     );
   }
