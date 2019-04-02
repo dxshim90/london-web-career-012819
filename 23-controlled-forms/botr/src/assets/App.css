@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-rows: 1fr 7fr;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.carousel {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.navbar {
+  display: grid;
+  background-color: orange;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-areas: 
+    "home . . . . . . . pc new";
+}
+
+.home-button {
+  grid-area: home;
+}
+
+.purchase-button {
+  grid-area: pc;
+}
+
+.new-button{
+  grid-area: new;
+}
+
+.portrait {
+  border-style: solid;
+  border-width: 10px;
+  border-color: yellow;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
