@@ -11,7 +11,7 @@ export default function Navbar(props){
   return (
     <div className="navbar">
       <button 
-        onClick={props.changePage('home')} 
+        onClick={() => props.changePage('home')} 
         className="home-button"
       >
         Botr
