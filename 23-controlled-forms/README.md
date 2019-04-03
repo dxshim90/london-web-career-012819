@@ -5,9 +5,9 @@ Conditional Rendering and Controlled Forms
 
 - [ ] Implement conditional rendering
 - [ ] Debug the `event` object we get in our event handler callbacks
+- [ ] Explain why event handler callbacks are written as arrow functions rather than regular functions
 - [ ] Write fully controlled forms
 - [ ] Pass data up and down the component hierarchy with our callbacks
-
 - [ ] Correctly choose when to use `props` vs `state`, and explain why one would use one or the other
 - [ ] Manipulate the DOM by changing values in `state` instead of using vanilla JS
 - [ ] Draw a component hierarchy and describe the Flow of Information

@@ -1,11 +1,9 @@
 import React from 'react'
-import bots from '../apis/data'
 import BotPortrait from "../components/BotPortrait"
 
 class BotCarousel extends React.Component {
 
   state = {
-    bots: [...bots],
     botIndex: 0,
     purchasedBots: []
   }
@@ -22,8 +20,10 @@ class BotCarousel extends React.Component {
     this.nextBot()  
   }
 
+  
+
   nextBot = () => {
-    if (this.state.botIndex === this.state.bots.length-1) {
+    if (this.state.botIndex === this.props.bots.length-1) {
       this.setState({
         botIndex: 0
       })
@@ -35,7 +35,7 @@ class BotCarousel extends React.Component {
   }
 
   render(){
-    const bot = this.state.bots[this.state.botIndex]
+    const bot = this.props.bots[this.state.botIndex]
 
     return (
       <div className="carousel">
