@@ -1,23 +1,21 @@
 import React from 'react'
 import PinCard from "../components/PinCard"
 
-class PinBoard extends React.Component {
+function PinBoard ({ pins }) {
 
-  renderPinCards(){
-    const data = this.props.pins
+  function renderPinCards(){
+    const data = pins
 
-    return data.map(pin => {
-      return <PinCard image_url={pin.image_url}/>
+    return data.map((pin,index) => {
+      return <PinCard key={index} image_url={pin.image_url}/>
     })
   }
 
-  render(){
     return (
-      <div>
-        {this.renderPinCards()}
+      <div className="pin-board">
+        {renderPinCards()}
       </div>
     )
-  }
 }
 
 export default PinBoard

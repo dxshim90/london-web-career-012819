@@ -8,20 +8,23 @@ class TopicContainer extends React.Component {
   renderTopicCards(){
     const data = this.props.topics
 
-    return data.map(topic => {
-      return <TopicCard name={topic.name} image_url={topic.image_url}/>
+    return data.map((topic,index) => {
+      const { name, image_url } = topic
+      return <TopicCard key={index} name={name} image_url={image_url}/>
     })
   }
 
   render(){
 
     return (
-      <div>
+      <div className="topic-container">
         <h3>
           Hi Person! Your feed is made up of these topics:
         </h3>
-        {this.renderTopicCards()}
-        <button>Edit</button>
+        <div className="topic-cards">
+          {this.renderTopicCards()}
+          <button>Edit</button>
+        </div>
       </div>
     )
   }

@@ -1,74 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './assets/App.css';
 import Navbar from "./containers/Navbar"
 import TopicContainer from "./containers/TopicContainer"
 import PinBoard from "./containers/PinBoard"
+import { pins, topics} from "./data.js"
 
-const pins = [
-  {
-    image_url: "https://www.goodnet.org/photos/620x0/28588.jpg",
-    category: "hiding"
-  },
-  {
-    image_url: "https://www.thesprucepets.com/thmb/GXdLaAsb73pDJozzGvfL4g0l8is=/450x0/filters:no_upscale():max_bytes(150000):strip_icc()/Cats-cuddling-GettyImages-154502253-5887e0e43df78c2ccdb61dc0.jpg",
-    category: "playing"
-  },
-  {
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT3aPdEhpHaJUbRRy5Ty5AUivnx3ZYSk3_e74s-SqpvhDTaMvk",
-    category: "wat"
-  },
-  {
-    image_url: "https://www.goodnet.org/photos/620x0/28588.jpg",
-    category: "hiding"
-  },
-  {
-    image_url: "https://www.thesprucepets.com/thmb/GXdLaAsb73pDJozzGvfL4g0l8is=/450x0/filters:no_upscale():max_bytes(150000):strip_icc()/Cats-cuddling-GettyImages-154502253-5887e0e43df78c2ccdb61dc0.jpg",
-    category: "playing"
-  },
-  {
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT3aPdEhpHaJUbRRy5Ty5AUivnx3ZYSk3_e74s-SqpvhDTaMvk",
-    category: "wat"
-  },
-  {
-    image_url: "https://www.goodnet.org/photos/620x0/28588.jpg",
-    category: "hiding"
-  },
-  {
-    image_url: "https://www.thesprucepets.com/thmb/GXdLaAsb73pDJozzGvfL4g0l8is=/450x0/filters:no_upscale():max_bytes(150000):strip_icc()/Cats-cuddling-GettyImages-154502253-5887e0e43df78c2ccdb61dc0.jpg",
-    category: "playing"
-  },
-  {
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT3aPdEhpHaJUbRRy5Ty5AUivnx3ZYSk3_e74s-SqpvhDTaMvk",
-    category: "wat"
-  },
-  {
-    image_url: "https://www.goodnet.org/photos/620x0/28588.jpg",
-    category: "hiding"
-  },
-  {
-    image_url: "https://www.thesprucepets.com/thmb/GXdLaAsb73pDJozzGvfL4g0l8is=/450x0/filters:no_upscale():max_bytes(150000):strip_icc()/Cats-cuddling-GettyImages-154502253-5887e0e43df78c2ccdb61dc0.jpg",
-    category: "playing"
-  },
-  {
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT3aPdEhpHaJUbRRy5Ty5AUivnx3ZYSk3_e74s-SqpvhDTaMvk",
-    category: "wat"
-  },
-]
-
-const topics = [
-  {
-    image_url: "https://www.goodnet.org/photos/620x0/28588.jpg",
-    name: "box cat"
-  },
-  {
-    image_url: "https://www.thesprucepets.com/thmb/GXdLaAsb73pDJozzGvfL4g0l8is=/450x0/filters:no_upscale():max_bytes(150000):strip_icc()/Cats-cuddling-GettyImages-154502253-5887e0e43df78c2ccdb61dc0.jpg",
-    name: "cuddly cats"
-  },
-  {
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT3aPdEhpHaJUbRRy5Ty5AUivnx3ZYSk3_e74s-SqpvhDTaMvk",
-    name: "blue red cat"
-  }
-]
 
 class App extends Component {
 
@@ -88,19 +24,25 @@ class App extends Component {
   }
 
   filterPins = () => {
-    return this.state.pins.filter(pin => {
+    const { pins } = this.state
+
+    return pins.filter(pin => {
       return pin.category.includes(this.state.searchTerm)
     })
   }
 
 
   render() {
+    const { user } = this.state
+
+    const { topics } = user
+
     return (
-      <Fragment>
+      <div className="app">
         <Navbar setSearchTerm={this.setSearchTerm} />
-        <TopicContainer topics={this.state.user.topics}/>
+        <TopicContainer topics={topics}/>
         <PinBoard pins={this.filterPins()} />
-      </Fragment>
+      </div>
     );
   }
 }

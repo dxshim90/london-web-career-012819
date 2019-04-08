@@ -18,23 +18,24 @@ React Best Practices
 
 **The More You Know**
 
-- [ ] Functional vs Class Components
-  - [ ] Implicit return for Functional components
-  - [ ] What is PureComponent?
-- [ ] Fragments
-- [ ] defaultProps and propTypes
-- [ ] Conditional Rendering:
-  - [ ] short circuiting
-  - [ ] Expression ternary JSX gotcha
-- [ ] Callbacks (avoid useless wrapping)
-- [ ] `getDerivedStateFromProps` use case
+- [x] Functional vs Class Components
+  - Don't need state or component lifecycle, just make functional
+  - [x] Implicit return for Functional components
+  - [x] What is PureComponent?
+      - Don't rerender unless props and state change (Optimization/speed)
+- [x] Fragments
+- [x] defaultProps and propTypes
+- [x] Conditional Rendering:
+  - [x] short circuiting
+  - [x] Expression ternary JSX gotcha
+- [x] Callbacks (avoid useless wrapping)
 - Syntax often seen in React:
-  - [ ] Arrow functions returning objects
-  - [ ] Destructuring
-  - [ ] Spread (w/ prepend and append)
-  - [ ] Objects with the same key/value name
-  - [ ] constructor vs. ES7 instance variables
-  - [ ] map (as a way to update objects in an array of objects)
+  - [x] Arrow functions returning objects
+  - [x] Destructuring
+  - [x] Spread (w/ prepend and append)
+  - [x] Objects with the same key/value name
+  - [x] constructor vs. ES7 instance variables
+  - [x] map (as a way to update objects in an array of objects)
   - [ ] { [variable]: "as_key" }
 
 ## Resources

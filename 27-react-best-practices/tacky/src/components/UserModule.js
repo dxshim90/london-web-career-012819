@@ -1,7 +1,6 @@
 import React from 'react'
 
-function UserModule (props) {
-  return (
+const UserModule = (props) => (
     <div>
       <button>Home</button>
       <button>Following</button>
@@ -10,7 +9,7 @@ function UserModule (props) {
       <button>Notifcations</button>
       <button>...</button>
     </div>
-  )
-}
+)
+
 
 export default UserModule

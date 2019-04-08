@@ -1,9 +1,9 @@
 import React from 'react'
 
-function PinCard (props){
+function PinCard ({ image_url = "default url" }){
     return <img 
-      style={{width: "300px"}}
-      src={props.image_url}
+      style={{maxWidth: "250px"}}
+      src={image_url}
       alt="cat box" />
 }
 

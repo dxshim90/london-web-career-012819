@@ -19,9 +19,11 @@ class SearchBar extends React.Component {
 
   
   render(){
+    console.log(this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <input 
+          style={{width: "90%", height: "100%"}}
           type="text"
           name="searchInput"
           value={this.state.searchInput}
@@ -30,6 +32,11 @@ class SearchBar extends React.Component {
       </form>
     )
   }
+}
+
+SearchBar.defaultProps = {
+  // beef: "steak"
+  setSearchTerm: () => {}
 }
 
 export default SearchBar
