@@ -16,7 +16,7 @@ class StatePage extends Component {
   }
 
   componentDidMount(){
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${this.props.state}&term=barbecue`, { headers })
+    fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${this.props.match.params.area}&term=barbecue`, { headers })
     .then(res => res.json())
     .then((data) => {
       this.setState({
@@ -44,7 +44,7 @@ class StatePage extends Component {
     } else {
      return (
       <div>
-        <h1>{this.props.state}</h1>
+        <h1>{this.props.match.params.area}</h1>
         <div className="card-container">
           {this.renderLocations()}
         </div>
@@ -54,6 +54,7 @@ class StatePage extends Component {
   }
 
   render(){
+    console.log("ROUTER PROPS", this.props)
     return (
       <div>
         {this.loadingBay()}
