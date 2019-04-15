@@ -4,17 +4,17 @@ import UserBots from "../components/UserBots"
 
 class Profile extends React.Component {
 	state = {
-		user: null,
+		// user: null,
 		balance: 0,
 	}
-	componentDidMount(){
-		const userId = this.props.match.params.id
-		fetch(`http://localhost:3001/api/v1/users/${userId}`)
-		.then(res => res.json())
-		.then(response => {
-			this.setState({user: response})
-		})
-	}
+	// componentDidMount(){
+	// 	const userId = this.props.match.params.id
+	// 	fetch(`http://localhost:3001/api/v1/users/${userId}`)
+	// 	.then(res => res.json())
+	// 	.then(response => {
+	// 		this.setState({user: response})
+	// 	})
+	// }
 
 	toggleSale = (botID) => {
 		fetch(`http://localhost:3001/api/v1/bots/${botID}/toggle_sale`,{
@@ -44,25 +44,30 @@ class Profile extends React.Component {
 	}
 
 	handleSubmit = () => {
-		fetch(`http://localhost:3001/api/v1/users/${this.state.user.id}/add_balance`, {
+		fetch(`http://localhost:3001/api/v1/users/${this.props.currentUser.id}/add_balance`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"Accepts": "application/json",
+				"Authorization": localStorage.getItem("token")
 			},
 			body: JSON.stringify({balance: this.state.balance})
 		})
 		.then(res => res.json())
 		.then(response => {
-			this.setState({
-				user: response,
-				balance: 0,
-			})
+			if(response.errors){
+				alert(response.errors)
+			} else {
+				this.setState({
+					user: response,
+					balance: 0,
+				})
+			}
 		})
 	}
 
 	getNewBot = () => {
-		fetch(`http://localhost:3001/api/v1/users/${this.state.user.id}/get_bot`, {
+		fetch(`http://localhost:3001/api/v1/users/${this.props.currentUser.id}/get_bot`, {
 			method: "POST",
 		})
 		.then(res => res.json())
@@ -74,18 +79,18 @@ class Profile extends React.Component {
 	}
 
 	render(){
-		const { user } = this.state
+		const { currentUser } = this.props
 
-		if(user){
+		if(currentUser){
 			return (
 				<Grid columns={2} centered>
 					<Grid.Column width={3}>
 						<Segment>
-							<Image src={user.avatar_url} fluid />
-							<strong>{user.username}</strong><br/>
-							<strong>{user.name}</strong>
-							<p>Balance: ${user.balance}</p>
-							<p>{user.bio}</p>
+							<Image src={currentUser.avatar_url} fluid />
+							<strong>{currentUser.username}</strong><br/>
+							<strong>{currentUser.name}</strong>
+							<p>Balance: ${currentUser.balance}</p>
+							<p>{currentUser.bio}</p>
 						</Segment>
 						<Segment>
 							<Form onSubmit={this.handleSubmit}>
@@ -101,7 +106,7 @@ class Profile extends React.Component {
 					<Grid.Column width={9}>
 						<Segment>
 							<Button onClick={this.getNewBot}>Roll the dice!</Button>
-							<UserBots bots={user.bots} toggleSale={this.toggleSale}/>
+							<UserBots bots={currentUser.bots} toggleSale={this.toggleSale}/>
 						</Segment>
 					</Grid.Column>
 				</Grid>

@@ -29,7 +29,7 @@ class SignupForm extends React.Component {
 			if (response.errors){
 				alert(response.errors)
 			} else {
-				this.props.setCurrentUser(response)
+				this.props.login(response)
 			}
 		})
 	}

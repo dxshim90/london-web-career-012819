@@ -30,7 +30,7 @@ class LoginForm extends React.Component {
 				alert(response.errors)
 			} else {
 				// If login succeeded
-				this.props.setCurrentUser(response)
+				this.props.login(response)
 			}
 		})
 	}

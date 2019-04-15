@@ -14,13 +14,27 @@ class App extends Component {
 		currentUser: null
 	}
 
-	componentDidMount(){
-		const userID = localStorage.getItem("user_id")
+	deduct = (price) => {
+		this.setState({
+			currentUser: {...this.state.currentUser, balance: this.state.currentUser.balance - price }
+		})
+	}
 
-		if(userID){
+	logOut = () => {
+		localStorage.removeItem("token")
+
+		this.setState({
+			currentUser: null
+		}, () => this.props.history.push("/login"))
+	}
+
+	componentDidMount(){
+		const token = localStorage.getItem("token")
+
+		if(token){
 			fetch("http://localhost:3001/api/v1/auto_login", {
 				headers: {
-					"Authorization": userID
+					"Authorization": token
 				}
 			})
 			.then(res => res.json())
@@ -34,26 +48,35 @@ class App extends Component {
 		}
 	}
 
-	setCurrentUser = (user) => {
+	login = (response) => {
 		this.setState({
-			currentUser: user
+			currentUser: response.user
 		}, () => {
-			localStorage.setItem("user_id", this.state.currentUser.id)
-			this.props.history.push(`/users/${this.state.currentUser.id}`)
+			localStorage.setItem("token", response.token)
+			this.props.history.push("/profile")
+		})
+	}
+
+
+
+	setCurrentUser = (response) => {
+		this.setState({
+			currentUser: response.user
+		}, () => {
+			this.props.history.push(this.props.location.pathname)
 		})
 	}
 
 	render() {
-		console.log(this.state.currentUser)
 		return (
 			<Grid>
-				<Navbar />
+				<Navbar logOut={this.logOut} currentUser={this.state.currentUser}/>
 				<Grid.Row centered>
 					<Switch>
-						<Route path="/users/:id" component={Profile} />
-						<Route path="/shop" component={ShopPage} />
-						<Route path="/login" render={(routerProps) => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser} />} />
-						<Route path="/signup" render={(routerProps) => <SignupForm {...routerProps} setCurrentUser={this.setCurrentUser} />}/>
+						<Route path="/profile" render={(routerProps) => <Profile {...routerProps} currentUser={this.state.currentUser} />}/>
+						<Route path="/shop" render={(routerProps) => <ShopPage {...routerProps} deduct={this.deduct} />} />} />
+						<Route path="/login" render={(routerProps) => <LoginForm {...routerProps} login={this.login} />} />
+						<Route path="/signup" render={(routerProps) => <SignupForm {...routerProps} login={this.login} />}/>
 					</Switch>
 				</Grid.Row>
 			</Grid>

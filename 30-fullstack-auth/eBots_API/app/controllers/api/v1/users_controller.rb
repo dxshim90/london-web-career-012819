@@ -15,8 +15,12 @@ class Api::V1::UsersController < ApplicationController
 			avatar_url: "https://robohash.org/#{params[:name].gsub(" ", "")}.png?size=300x300&set=set4"
 		)
 
+		
+
 		if user.save
-			render json: user
+			token = encode_token(user.id)
+
+      render json: {user: UserSerializer.new(user), token: token}
 		else
 			render json: {errors: user.errors.full_messages}
 		end
@@ -25,9 +29,14 @@ class Api::V1::UsersController < ApplicationController
 	def add_balance
 		user = User.find(params[:id])
 
-		user.update(balance: user.balance+params[:balance].to_f)
+		if user.id == session_user.id
+			user.update(balance: user.balance+params[:balance].to_f)
+			render json: user
+		else
+			render json: {errors: "Whoa! This ain't yours!"}
+		end
 
-		render json: user
+		
 	end
 
 	def get_bot

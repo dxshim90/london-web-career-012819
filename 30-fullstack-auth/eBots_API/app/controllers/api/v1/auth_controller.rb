@@ -4,17 +4,19 @@ class Api::V1::AuthController < ApplicationController
     @user = User.find_by(username: params[:username])
 
     if @user && @user.authenticate(params[:password])
-      render json: @user
+
+      token = encode_token(@user.id)
+
+      render json: {user: UserSerializer.new(@user), token: token}
     else
       render json: {errors: "You dun goofed!"}
     end
   end
 
   def get_current_user
-    user = User.find_by(id: request.headers["Authorization"])
-
-    if user
-      render json: user
+   
+    if session_user
+      render json: {user: UserSerializer.new(session_user)}
     else
       render json: {errors: "Whoa! Hold your horses!"}
     end

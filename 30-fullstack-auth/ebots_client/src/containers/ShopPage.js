@@ -17,16 +17,26 @@ class ShopPage extends React.Component {
 
 	selectBot = (botID) => {
 		fetch(`http://localhost:3001/api/v1/bots/${botID}/purchase`, {
-			method: "POST"
+			method: "POST",
+			headers: {
+				"Authorization": localStorage.getItem("token")
+			}
 		})
 		.then(res => res.json())
 		.then(response => {
-			this.setState(prevState => {
+			if (response.errors){
+				alert(response.errors)
+			} else {
+				
+				this.props.deduct(response.price)
+
+				this.setState(prevState => {
 				let newBots = prevState.bots.filter(bot => bot.id !== response.id)
 				return {
 					bots: newBots
 				}
 			})
+			}
 		})
 	}
 	render(){
